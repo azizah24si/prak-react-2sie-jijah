@@ -17,7 +17,7 @@ export default function BiodataDiri() {
 
 // Child Components
 function NamaLengkap() {
-  return <p>Namaku Azizah Arshadinii</p>;
+  return <p>Namaku Azizah Arshadini</p>;
 }
 
 function Umur() {
