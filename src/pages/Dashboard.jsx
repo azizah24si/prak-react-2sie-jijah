@@ -16,8 +16,13 @@ export default function Dashboard() {
 
     return (
         <div id="dashboard-container" className="p-2">
+            
             {/* Header Area dengan Filter Button */}
             <div className="flex justify-between items-center pr-5">
+                <PageHeader 
+                    title="Dashboard" 
+                    breadcrumb={["Dashboard", "Overview"]}
+                />
                 <PageHeader />
                 
                 {/* IMPROVISASI 1 (Visual): Button Group Filter */}
