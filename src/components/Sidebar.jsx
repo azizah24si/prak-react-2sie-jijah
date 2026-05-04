@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaThLarge, FaListUl, FaUserFriends, FaPlus, FaSignOutAlt } from "react-icons/fa";
+import { FaThLarge, FaListUl, FaUserFriends, FaBoxOpen, FaPlus, FaSignOutAlt } from "react-icons/fa";
 
 export default function Sidebar() {
   const menuClass = ({ isActive }) =>
@@ -38,6 +38,11 @@ export default function Sidebar() {
           <li>
             <NavLink to="/customers" className={menuClass}>
               <FaUserFriends className="mr-4 text-xl" /> Customers
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/products" className={menuClass}>
+              <FaBoxOpen className="mr-4 text-xl" /> Products
             </NavLink>
           </li>
 
