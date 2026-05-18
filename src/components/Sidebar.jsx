@@ -45,6 +45,11 @@ export default function Sidebar() {
               <FaBoxOpen className="mr-4 text-xl" /> Products
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/components" className={menuClass}>
+              <FaBoxOpen className="mr-4 text-xl" /> Componets
+            </NavLink>
+          </li>
 
           {/* TAMBAHKAN 3 MENU ERROR DI BAWAH INI */}
           <li className="pt-5 text-xs font-bold text-gray-400 uppercase">Simulasi Error</li>

@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-// Lazy load pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Orders = lazy(() => import("./pages/Orders"));
 const Customers = lazy(() => import("./pages/Customers"));
@@ -15,7 +14,7 @@ const AuthLayout = lazy(() => import("./layouts/AuthLayout"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const Forgot = lazy(() => import("./pages/auth/Forgot"));
-
+const Components = lazy(() => import("./pages/Components"));
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -27,6 +26,7 @@ function App() {
           <Route path="/customers/:id" element={<CustomerDetail />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/components" element={<Components />} />
 
           <Route
             path="/400"

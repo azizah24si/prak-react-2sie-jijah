@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import productData from "./productData.json";
+import Card from "../components/Card";
 
 export default function Products() {
   return (
+    <Card>
     <div className="p-4">
       <PageHeader
         title="Product List"
@@ -44,5 +46,6 @@ export default function Products() {
         </table>
       </div>
     </div>
+    </Card>
   );
 }
