@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import PageHeader from "../components/PageHeader";
+import PageHeader from "../../components/PageHeader";
 import productData from "./productData.json";
-import Card from "../components/Card";
+import Card from "../../components/Card";
 
 export default function Products() {
   return (

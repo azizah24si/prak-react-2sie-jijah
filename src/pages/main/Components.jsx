@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import PageHeader from "../components/PageHeader";
-import Button from "../components/Button";
-import Badge from "../components/Badge";
-import Avatar from "../components/Avatar";
-import Container from "../components/Container";
-import Footer from "../components/Footer";
-import Card from "../components/Card";
-import ProductCard from "../components/ProductCard";
-import Table from "../components/Table";
+import PageHeader from "../../components/PageHeader";
+import Button from "../../components/Button";
+import Badge from "../../components/Badge";
+import Avatar from "../../components/Avatar";
+import Container from "../../components/Container";
+import Footer from "../../components/Footer";
+import Card from "../../components/Card";
+import ProductCard from "../../components/ProductCard";
+import Table from "../../components/Table";
 
 export default function Components() {
   const headers = ["No", "Nama Produk", "Kategori", "Harga", "Aksi"];

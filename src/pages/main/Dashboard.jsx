@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaShoppingCart, FaTruck, FaBan, FaDollarSign, FaUtensils } 
 from "react-icons/fa";
-import PageHeader from ".././components/PageHeader";
+import PageHeader from "../../components/PageHeader";
 
 export default function Dashboard() {
     // IMPROVISASI 1: State untuk filter waktu (Daily, Weekly, Monthly)

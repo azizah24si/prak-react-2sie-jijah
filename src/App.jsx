@@ -1,20 +1,22 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const Orders = lazy(() => import("./pages/Orders"));
-const Customers = lazy(() => import("./pages/Customers"));
-const CustomerDetail = lazy(() => import("./pages/CustomerDetail"));
-const Products = lazy(() => import("./pages/Products"));
-const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const Dashboard = lazy(() => import("./pages/main/Dashboard"));
+const Orders = lazy(() => import("./pages/main/Orders"));
+const Customers = lazy(() => import("./pages/main/Customers"));
+const CustomerDetail = lazy(() => import("./pages/main/CustomerDetail"));
+const Products = lazy(() => import("./pages/main/Products"));
+const ProductDetail = lazy(() => import("./pages/main/ProductDetail"));
+const NotFound = lazy(() => import("./pages/main/NotFound"));
+const ErrorPage = lazy(() => import("./pages/main/ErrorPage"));
+const Components = lazy(() => import("./pages/main/Components"));
+const FiturXyz = lazy(() => import("./pages/main/FiturXyz"));
 const MainLayout = lazy(() => import("./layouts/MainLayout"));
 const AuthLayout = lazy(() => import("./layouts/AuthLayout"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const Forgot = lazy(() => import("./pages/auth/Forgot"));
-const Components = lazy(() => import("./pages/Components"));
+
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -27,7 +29,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/components" element={<Components />} />
-
+          <Route path="/fitur-xyz" element={<FiturXyz />} />
           <Route
             path="/400"
             element={

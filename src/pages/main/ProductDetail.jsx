@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PageHeader from "../components/PageHeader";
+import PageHeader from "../../components/PageHeader";
 
 export default function ProductDetail() {
   const { id } = useParams();

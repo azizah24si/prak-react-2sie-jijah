@@ -1,5 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { FaThLarge, FaListUl, FaUserFriends, FaBoxOpen, FaPlus, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaThLarge,
+  FaListUl,
+  FaUserFriends,
+  FaBoxOpen,
+  FaPuzzlePiece,
+  FaCogs,
+  FaPlus,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 export default function Sidebar() {
   const menuClass = ({ isActive }) =>
@@ -10,13 +19,22 @@ export default function Sidebar() {
     }`;
 
   return (
-    <div id="sidebar" className="flex min-h-screen w-90 flex-col bg-white p-10 shadow-lg">
+    <div
+      id="sidebar"
+      className="flex min-h-screen w-90 flex-col bg-white p-10 shadow-lg"
+    >
       {/* Logo */}
       <div id="sidebar-logo" className="flex flex-col">
         <span className="block text-[36px] font-[900] text-gray-900 leading-none tracking-tight font-poppins">
-          Sedap <b id="logo-dot" className="text-hijau">.</b>
+          Sedap{" "}
+          <b id="logo-dot" className="text-hijau">
+            .
+          </b>
         </span>
-        <span id="logo-subtitle" className="font-semibold text-gray-400 font-barlow">
+        <span
+          id="logo-subtitle"
+          className="font-semibold text-gray-400 font-barlow"
+        >
           Modern Admin Dashboard
         </span>
       </div>
@@ -40,20 +58,30 @@ export default function Sidebar() {
               <FaUserFriends className="mr-4 text-xl" /> Customers
             </NavLink>
           </li>
+
           <li>
             <NavLink to="/products" className={menuClass}>
               <FaBoxOpen className="mr-4 text-xl" /> Products
             </NavLink>
           </li>
+
           <li>
             <NavLink to="/components" className={menuClass}>
-              <FaBoxOpen className="mr-4 text-xl" /> Componets
+              <FaPuzzlePiece className="mr-4 text-xl" /> Components
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/fitur-xyz" className={menuClass}>
+              <FaCogs className="mr-4 text-xl" /> Fitur XYZ
             </NavLink>
           </li>
 
           {/* TAMBAHKAN 3 MENU ERROR DI BAWAH INI */}
-          <li className="pt-5 text-xs font-bold text-gray-400 uppercase">Simulasi Error</li>
-          
+          <li className="pt-5 text-xs font-bold text-gray-400 uppercase">
+            Simulasi Error
+          </li>
+
           <li>
             <NavLink to="/400" className={menuClass}>
               <div className="mr-4 text-xl font-bold">400</div> Bad Request
@@ -76,19 +104,27 @@ export default function Sidebar() {
 
       {/* Footer */}
       <div id="sidebar-footer" className="mt-auto">
-        <div id="footer-card" className="bg-hijau px-4 py-4 rounded-2xl shadow-lg mb-10 flex items-center justify-between relative overflow-hidden">
+        <div
+          id="footer-card"
+          className="bg-hijau px-4 py-4 rounded-2xl shadow-lg mb-10 flex items-center justify-between relative overflow-hidden"
+        >
           <div id="footer-text" className="text-white text-sm z-10">
-            <p className="w-2/3">Please organize your menus through button below!</p>
-            <div id="add-menu-button" className="flex justify-center items-center p-2 mt-3 bg-white rounded-md space-x-2 cursor-pointer">
+            <p className="w-2/3">
+              Please organize your menus through button below!
+            </p>
+            <div
+              id="add-menu-button"
+              className="flex justify-center items-center p-2 mt-3 bg-white rounded-md space-x-2 cursor-pointer"
+            >
               <span className="text-gray-600 font-bold flex items-center">
                 <FaPlus className="mr-2" /> Add Menus
               </span>
             </div>
           </div>
-          <img 
-            id="footer-avatar" 
-            src="https://avatar.iran.liara.run/public/28" 
-            className="w-16 h-16 rounded-full absolute -right-2 bottom-4 opacity-80" 
+          <img
+            id="footer-avatar"
+            src="https://avatar.iran.liara.run/public/28"
+            className="w-16 h-16 rounded-full absolute -right-2 bottom-4 opacity-80"
           />
         </div>
 
@@ -97,8 +133,18 @@ export default function Sidebar() {
           <span>Logout</span>
         </button>
 
-        <span id="footer-brand" className="font-bold text-gray-400 block text-xs">Sedap Restaurant Admin Dashboard</span>
-        <p id="footer-copyright" className="font-light text-gray-400 text-[10px]">© 2025 All Right Reserved</p>
+        <span
+          id="footer-brand"
+          className="font-bold text-gray-400 block text-xs"
+        >
+          Sedap Restaurant Admin Dashboard
+        </span>
+        <p
+          id="footer-copyright"
+          className="font-light text-gray-400 text-[10px]"
+        >
+          © 2025 All Right Reserved
+        </p>
       </div>
     </div>
   );

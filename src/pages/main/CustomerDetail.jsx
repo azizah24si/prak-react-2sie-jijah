@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { customers, LOYALTY_CONFIG } from "../data/ordersData";
-import PageHeader from "../components/PageHeader";
+import { customers, LOYALTY_CONFIG } from "../../data/ordersData";
+import PageHeader from "../../components/PageHeader";
 
 export default function CustomerDetail() {
   const { id } = useParams();
