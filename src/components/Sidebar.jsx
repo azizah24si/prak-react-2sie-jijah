@@ -77,6 +77,12 @@ export default function Sidebar() {
             </NavLink>
           </li>
 
+          <li>
+            <NavLink to="/notes" className={menuClass}>
+              <FaCogs className="mr-4 text-xl" /> Notes
+            </NavLink>
+          </li>
+
           {/* TAMBAHKAN 3 MENU ERROR DI BAWAH INI */}
           <li className="pt-5 text-xs font-bold text-gray-400 uppercase">
             Simulasi Error
