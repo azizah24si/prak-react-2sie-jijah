@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaThLarge,
   FaListUl,
@@ -9,8 +9,12 @@ import {
   FaPlus,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Sidebar() {
+  const { profile, signOut } = useAuth();
+  const navigate = useNavigate();
+
   const menuClass = ({ isActive }) =>
     `flex cursor-pointer items-center rounded-xl p-4 space-x-2 transition-all ${
       isActive
@@ -82,29 +86,6 @@ export default function Sidebar() {
               <FaCogs className="mr-4 text-xl" /> Notes
             </NavLink>
           </li>
-
-          {/* TAMBAHKAN 3 MENU ERROR DI BAWAH INI */}
-          <li className="pt-5 text-xs font-bold text-gray-400 uppercase">
-            Simulasi Error
-          </li>
-
-          <li>
-            <NavLink to="/400" className={menuClass}>
-              <div className="mr-4 text-xl font-bold">400</div> Bad Request
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/401" className={menuClass}>
-              <div className="mr-4 text-xl font-bold">401</div> Unauthorized
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/403" className={menuClass}>
-              <div className="mr-4 text-xl font-bold">403</div> Forbidden
-            </NavLink>
-          </li>
         </ul>
       </div>
 
@@ -134,7 +115,10 @@ export default function Sidebar() {
           />
         </div>
 
-        <button className="w-full flex items-center justify-center space-x-3 p-3 mb-6 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all duration-300 font-bold group shadow-sm">
+        <button
+          onClick={async () => { await signOut(); navigate("/login"); }}
+          className="w-full flex items-center justify-center space-x-3 p-3 mb-6 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all duration-300 font-bold group shadow-sm"
+        >
           <FaSignOutAlt className="group-hover:-translate-x-1 transition-transform text-lg" />
           <span>Logout</span>
         </button>

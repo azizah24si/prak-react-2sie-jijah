@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Dashboard = lazy(() => import("./pages/main/Dashboard"));
 const Orders = lazy(() => import("./pages/main/Orders"));
@@ -18,11 +19,24 @@ const Register = lazy(() => import("./pages/auth/Register"));
 const Forgot = lazy(() => import("./pages/auth/Forgot"));
 const Notes = lazy(() => import("./pages/main/Notes"));
 
+// Member pages
+const MemberLayout = lazy(() => import("./layouts/MemberLayout"));
+const MemberDashboard = lazy(() => import("./pages/member/MemberDashboard"));
+const MemberOrders = lazy(() => import("./pages/member/MemberOrders"));
+const Cart = lazy(() => import("./pages/member/Cart"));
+
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route element={<MainLayout />}>
+        {/* Admin Routes - protected with admin role guard */}
+        <Route
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
@@ -64,15 +78,30 @@ function App() {
               />
             }
           />
-
-          <Route path="*" element={<NotFound />} />
         </Route>
 
+        {/* Member Routes - protected with member/guest role guard */}
+        <Route
+          element={
+            <ProtectedRoute allowedRoles={["member", "guest"]}>
+              <MemberLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/member" element={<MemberDashboard />} />
+          <Route path="/member/orders" element={<MemberOrders />} />
+          <Route path="/member/cart" element={<Cart />} />
+        </Route>
+
+        {/* Auth Routes - public */}
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<Forgot />} />
         </Route>
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );

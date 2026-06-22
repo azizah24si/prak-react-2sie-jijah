@@ -1,12 +1,42 @@
 import { useParams, Link } from "react-router-dom";
-import { customers, LOYALTY_CONFIG } from "../../data/ordersData";
+import { useState, useEffect } from "react";
 import PageHeader from "../../components/PageHeader";
+import { supabase } from "../../lib/supabaseClient";
+
+const TIER_STYLES = {
+  Bronze: { bg: "bg-orange-100", text: "text-orange-600" },
+  Silver: { bg: "bg-gray-100", text: "text-gray-600" },
+  Gold: { bg: "bg-yellow-100", text: "text-yellow-600" },
+  Platinum: { bg: "bg-purple-100", text: "text-purple-600" },
+};
 
 export default function CustomerDetail() {
   const { id } = useParams();
+  const [customer, setCustomer] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Biar aman kalau id di data berupa number
-  const customer = customers.find((c) => String(c.id) === id);
+  useEffect(() => {
+    fetchCustomer();
+  }, [id]);
+
+  const fetchCustomer = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (error) throw error;
+      setCustomer(data);
+    } catch (err) {
+      console.error("Error fetching customer:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <div className="p-4">Loading...</div>;
 
   if (!customer) {
     return (
@@ -30,13 +60,13 @@ export default function CustomerDetail() {
     );
   }
 
-  const loyalty = LOYALTY_CONFIG[customer.loyalty] || {};
+  const loyalty = TIER_STYLES[customer.tier] || TIER_STYLES.Bronze;
 
   return (
     <div className="flex flex-col w-full">
       <PageHeader
         title="Customer Detail"
-        breadcrumb={["Dashboard", "Customers", customer.customerName]}
+        breadcrumb={["Dashboard", "Customers", customer.full_name || customer.email]}
       >
         <Link
           to="/customers"
@@ -52,15 +82,15 @@ export default function CustomerDetail() {
           <div className="flex items-center gap-4 mb-6">
             <img
               className="w-16 h-16 rounded-full border-2 border-[#00B074] object-cover"
-              src={`https://avatar.iran.liara.run/public?username=${customer.customerName}`}
-              alt={customer.customerName}
+              src={`https://avatar.iran.liara.run/public?username=${customer.full_name || customer.email}`}
+              alt={customer.full_name || customer.email}
             />
             <div>
-              <h2 className="text-xl font-bold text-gray-800">{customer.customerName}</h2>
+              <h2 className="text-xl font-bold text-gray-800">{customer.full_name || customer.email}</h2>
               <span
                 className={`px-3 py-1 rounded-full text-xs font-semibold ${loyalty.bg} ${loyalty.text}`}
               >
-                {customer.loyalty}
+                {customer.tier}
               </span>
             </div>
           </div>
@@ -69,26 +99,30 @@ export default function CustomerDetail() {
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-gray-50 pb-3">
               <span className="text-sm font-semibold text-gray-400">Customer ID</span>
-              <span className="font-mono text-gray-700 font-medium">#{customer.id}</span>
+              <span className="font-mono text-gray-700 font-medium text-xs">#{customer.id}</span>
             </div>
             <div className="flex items-center justify-between border-b border-gray-50 pb-3">
               <span className="text-sm font-semibold text-gray-400">Nama</span>
-              <span className="text-gray-700 font-medium">{customer.customerName}</span>
+              <span className="text-gray-700 font-medium">{customer.full_name || "-"}</span>
             </div>
             <div className="flex items-center justify-between border-b border-gray-50 pb-3">
               <span className="text-sm font-semibold text-gray-400">Email</span>
               <span className="text-gray-700">{customer.email}</span>
             </div>
             <div className="flex items-center justify-between border-b border-gray-50 pb-3">
-              <span className="text-sm font-semibold text-gray-400">Telepon</span>
-              <span className="text-gray-700">{customer.phone}</span>
+              <span className="text-sm font-semibold text-gray-400">Role</span>
+              <span className="text-gray-700 capitalize">{customer.role}</span>
+            </div>
+            <div className="flex items-center justify-between border-b border-gray-50 pb-3">
+              <span className="text-sm font-semibold text-gray-400">Points</span>
+              <span className="text-purple-600 font-bold">{customer.points}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-gray-400">Loyalty</span>
+              <span className="text-sm font-semibold text-gray-400">Tier</span>
               <span
                 className={`px-3 py-1 rounded-full text-xs font-semibold ${loyalty.bg} ${loyalty.text}`}
               >
-                {customer.loyalty}
+                {customer.tier}
               </span>
             </div>
           </div>

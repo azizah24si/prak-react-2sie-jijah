@@ -1,8 +1,11 @@
 import { FaBell, FaSearch } from "react-icons/fa";
 import { FcAreaChart } from "react-icons/fc";
 import { SlSettings } from "react-icons/sl";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Header() {
+  const { profile } = useAuth();
+  const displayName = profile?.full_name || profile?.email || "Loading...";
   return (
     <div id="header-container" className="flex justify-between items-center p-4">
       {/* Search Bar */}
@@ -34,7 +37,7 @@ export default function Header() {
         {/* Profile Section */}
         <div id="profile-container" className="flex items-center space-x-4 border-l pl-4 border-gray-300">
           <span id="profile-text" className="text-gray-700">
-            Hello, <b className="font-bold">Azizah Arshadini</b>
+            Hello, <b className="font-bold">{displayName}</b>
           </span>
           <img
             id="profile-avatar"
